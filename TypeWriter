@@ -32,9 +32,63 @@ public class TypeWriter {
         return ret;
     }
 
+    public static String level1(String input) {
+        char before = input.charAt((int) (Math.random() * (input.length())));
+
+        String ret = "" + before;
+
+        for (int i = 1; i < input.length(); i++) {
+            HashMap<Character, Integer> chars = new HashMap<>();
+
+            for (int j = 1; j < input.length(); j++) {
+                char c = input.charAt(j);
+
+                if (input.charAt(j-1) != before) {
+                    continue;
+                }
+
+                if (!chars.containsKey(c)) {
+                    chars.put(c, 1);
+                } else {
+                    chars.put(c, chars.get(c) + 1);
+                }
+            }
+
+            if (chars.isEmpty()) {
+                before = input.charAt((int) (Math.random() * (input.length())));
+                continue;
+            }
+
+            if (chars.size() == 1) {
+                for (char key : chars.keySet()) {
+                    ret += key;
+                    before = key;
+                }
+                continue;
+            }
+
+            System.out.println("testing size = " + chars.size());
+
+            int random = (int) (Math.random() * (input.length() + 1));
+
+            for (char key : chars.keySet()) {
+                random -= chars.get(key);
+
+                if (random <= 0) {
+                    ret += key;
+                    before = key;
+                    break;
+                }
+            }
+        }
+
+        return ret;
+    }
+
     public static void main(String[] args) {
         String test = "Hello, how are you? Yes, I am fine.";
-
+        String test1 = "Skibidi toilet will be mine yeah, ohio town yeah, diamonds to mine, im on that big sigma grind";
         System.out.println(level0(test));
+        System.out.println(level1(test1));
     }
 }
