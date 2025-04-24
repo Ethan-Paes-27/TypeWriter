@@ -1,0 +1,40 @@
+import java.util.HashMap;
+
+public class TypeWriter {
+
+    public static String level0(String input) {
+        HashMap<Character, Integer> chars = new HashMap<>();
+
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!chars.containsKey(c)) {
+                chars.put(c, 1);
+            } else {
+                chars.put(c, chars.get(c) + 1);
+            }
+        }
+
+        String ret = "";
+
+        for (int i = 0; i < input.length(); i++) {
+            int random = (int) (Math.random() * (input.length() + 1));
+
+            for (char key : chars.keySet()) {
+                random -= chars.get(key);
+
+                if (random <= 0) {
+                    ret += key;
+                    break;
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    public static void main(String[] args) {
+        String test = "Hello, how are you? Yes, I am fine.";
+
+        System.out.println(level0(test));
+    }
+}
