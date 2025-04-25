@@ -15,26 +15,18 @@ public class RandomTextGenerator {
         
         //START OF VALIDATION
 
-        // try {
-        //     scanner = new Scanner(new File(sourceName));
-        //     while (scanner.hasNextLine()) {
-        //         String line = scanner.nextLine();
-        //         source += line;
-        //     }
-        //     System.out.println(source);
-        //     scanner.close();
-        // }
-        // catch (Exception e) {
-        //     System.err.println("Source passed does not exist or is not available!");
-        //     return null;
-        // }
-        try (BufferedReader reader = new BufferedReader(new FileReader("GreatGatsby.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
+        try {
+            scanner = new Scanner(new File(sourceName));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
                 source += line;
             }
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
+            System.out.println(source);
+            scanner.close();
+        }
+        catch (Exception e) {
+            System.err.println("Source passed does not exist or is not available!");
+            return null;
         }
         try {
             output = new PrintWriter(new File(outputName));
@@ -111,6 +103,6 @@ public class RandomTextGenerator {
 
 
     public static void main(String[] args) {
-        generateText(45, 1000, "GreatGatsby.txt", "RecreatedGatsby.txt");
+        generateText(10, 1000, "GreatGatsby.txt", "RecreatedGatsby.txt");
     }
 }
