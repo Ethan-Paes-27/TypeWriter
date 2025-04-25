@@ -1,3 +1,4 @@
+
 import java.util.HashMap;
 
 public class TypeWriter {
@@ -39,6 +40,7 @@ public class TypeWriter {
 
         for (int i = 1; i < input.length(); i++) {
             HashMap<Character, Integer> chars = new HashMap<>();
+            int total = 0;
 
             for (int j = 1; j < input.length(); j++) {
                 char c = input.charAt(j);
@@ -52,24 +54,18 @@ public class TypeWriter {
                 } else {
                     chars.put(c, chars.get(c) + 1);
                 }
+                total++;
             }
 
             if (chars.isEmpty()) {
                 before = input.charAt((int) (Math.random() * (input.length())));
-                continue;
-            }
-
-            if (chars.size() == 1) {
-                for (char key : chars.keySet()) {
-                    ret += key;
-                    before = key;
-                }
+                System.out.println("random");
                 continue;
             }
 
             System.out.println("testing size = " + chars.size());
 
-            int random = (int) (Math.random() * (input.length() + 1));
+            int random = (int) (Math.random() * (total));
 
             for (char key : chars.keySet()) {
                 random -= chars.get(key);
@@ -86,7 +82,7 @@ public class TypeWriter {
     }
 
     public static void main(String[] args) {
-        String test = "Hello, how are you? Yes, I am fine.";
+        String test = "abcdefghijklmnopqrstuvwxyz";
         String test1 = "Skibidi toilet will be mine yeah, ohio town yeah, diamonds to mine, im on that big sigma grind";
         System.out.println(level0(test));
         System.out.println(level1(test1));
