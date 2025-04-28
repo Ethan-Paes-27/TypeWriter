@@ -1,56 +1,47 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class RandomTextGenerator {
 
-    public static String generateText(int k, int length, String sourceName, String outputName) {
+    public static void generateText(int k, int length, String sourceName, String outputName) {
         String source = "";
         Scanner scanner;
         PrintWriter output;
-        
+
         //START OF VALIDATION
 
         try {
-            scanner = new Scanner(new File(sourceName));
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                source += line;
-            }
-            System.out.println(source);
-            scanner.close();
+            source = new Scanner(new File(sourceName)).useDelimiter("\\Z").next();
         }
         catch (Exception e) {
             System.err.println("Source passed does not exist or is not available!");
-            return null;
+            return;
         }
         try {
-            output = new PrintWriter(new File(outputName));
+            output = new PrintWriter(outputName);
         }
         catch (Exception e) {
             System.err.println("Output passed does not exist or is not available!");
-            return null;
+            return;
         }
         if (k < 0) {
             System.err.println("K is negative!");
             output.close();
-            return null;
+            return;
         }
         if (source.length() < length) {
             System.err.println("Source length is less than the passed length!");
             output.close();
-            return null;
+            return;
         }
 
         //END OF VALIDATION
 
         int sourceLen = source.length();
 
-        int random = (int)(Math.random() * sourceLen);
+        int random = (int)(Math.random() * (sourceLen - length));
 
         String before = source.substring(random, random + k);
 
@@ -76,7 +67,6 @@ public class RandomTextGenerator {
             }
 
             if (chars.isEmpty()) {
-                System.out.println("empty");
                 random = (int)(Math.random() * sourceLen);
                 before = source.substring(random, random + k);
                 i--;
@@ -96,13 +86,31 @@ public class RandomTextGenerator {
                 }
             }
         }
+
         output.print(ret);
         output.close();
-        return ret;
     }
-
 
     public static void main(String[] args) {
-        generateText(10, 1000, "GreatGatsby.txt", "RecreatedGatsby.txt");
+        Scanner scan = new Scanner(System.in);
+
+        System.out.print("What file should I take from: " );
+        String source = scan.next();
+        System.out.println();
+
+        System.out.print("What file should I put to: " );
+        String output = scan.next();
+        System.out.println();
+
+        System.out.print("What k should I use: " );
+        int k = scan.nextInt();
+        System.out.println();
+
+        System.out.print("What length should I print: " );
+        int len = scan.nextInt();
+        System.out.println();
+
+        generateText(k, len, source, output);
     }
 }
+
