@@ -45,9 +45,9 @@ public class RandomTextGenerator {
 
         String before = source.substring(random, random + k);
 
-        String ret = "" + before;
+        String ret = "";
 
-        for (int i = k; i < length; i++) {
+        for (int i = 0; i < length; i++) {
             HashMap<Character, Integer> chars = new HashMap<>();
             int total = 0;
 
