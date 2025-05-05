@@ -51,6 +51,12 @@ public class RandomTextGenerator {
             HashMap<Character, Integer> chars = new HashMap<>();
             int total = 0;
 
+            if (k == 0) {
+                int randomPos = (int)(Math.random() * sourceLen);
+                ret += source.charAt(randomPos);
+                continue;
+            }
+
             for (int j = k; j < sourceLen; j++) {
                 char c = source.charAt(j);
 
@@ -98,9 +104,9 @@ public class RandomTextGenerator {
         String source = scan.next();
         System.out.println();
 
-        System.out.print("What file should I put to: " );
-        String output = scan.next();
-        System.out.println();
+//        System.out.print("What file should I put to: " );
+//        String output = scan.next();
+//        System.out.println();
 
         System.out.print("What k should I use: " );
         int k = scan.nextInt();
@@ -110,7 +116,7 @@ public class RandomTextGenerator {
         int len = scan.nextInt();
         System.out.println();
 
-        generateText(k, len, source, output);
+        generateText(k, len, source, "Output.txt");
     }
 }
 
