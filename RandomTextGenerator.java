@@ -45,7 +45,7 @@ public class RandomTextGenerator {
 
         String before = source.substring(random, random + k);
 
-        StringBuilder returnString = new StringBuilder();
+        String ret = "";
 
         for (int i = 0; i < length; i++) {
             HashMap<Character, Integer> chars = new HashMap<>();
@@ -53,8 +53,7 @@ public class RandomTextGenerator {
 
             if (k == 0) {
                 int randomPos = (int)(Math.random() * sourceLen);
-                //ret += source.charAt(randomPos);
-                returnString.append(source.charAt(randomPos));
+                ret += source.charAt(randomPos);
                 continue;
             }
 
@@ -86,8 +85,7 @@ public class RandomTextGenerator {
                 rand -= chars.get(key);
 
                 if (rand <= 0) {
-                    //ret += before.charAt(0);
-                    returnString.append(before.charAt(0));
+                    ret += before.charAt(0);
                     before = before.substring(1);
                     before += key;
                     break;
@@ -95,8 +93,7 @@ public class RandomTextGenerator {
             }
         }
 
-        //output.print(ret);
-        output.print(returnString.toString());
+        output.print(ret);
         output.close();
     }
 
