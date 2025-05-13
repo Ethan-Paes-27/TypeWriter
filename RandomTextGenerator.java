@@ -100,9 +100,36 @@ public class RandomTextGenerator {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        System.out.print("What file should I take from: " );
-        String source = scan.next();
-        System.out.println();
+        System.out.println("What book do you want?");
+        System.out.println("1. Frankenstein");
+        System.out.println("2. GreatGatsby");
+        System.out.println("3. Odyssey");
+        System.out.println("4. Sherlock Holmes");
+        System.out.println("5. Wizard Of Oz");
+        int choice = scan.nextInt();
+
+        String source = "";
+
+        if (choice < 1 || choice > 5) {
+            System.out.println("Choice not valid!");
+            return;
+        }
+
+        if (choice == 1) {
+            source = "Frankenstein.txt";
+        }
+        if (choice == 2) {
+            source = "GreatGatsby.txt";
+        }
+        if (choice == 3) {
+            source = "Odyssey.txt";
+        }
+        if (choice == 4) {
+            source = "SherlockHolmes.txt";
+        }
+        if (choice == 5) {
+            source = "WizardOfOz.txt";
+        }
 
 //        System.out.print("What file should I put to: " );
 //        String output = scan.next();
